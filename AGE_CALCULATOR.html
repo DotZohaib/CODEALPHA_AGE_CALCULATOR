@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Age Calculator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<style>
+    body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f4f4f4;
+}
+
+.container {
+    text-align: center;
+    background: #fff;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+form {
+    margin-bottom: 1rem;
+}
+
+label {
+    font-size: 1.2rem;
+}
+
+input[type="date"] {
+    padding: 0.5rem;
+    font-size: 1rem;
+    margin: 1rem 0;
+}
+
+button {
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    border: none;
+    background: #007bff;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #0056b3;
+}
+
+#result {
+    font-size: 1.5rem;
+    margin-top: 1rem;
+}
+
+</style>
+<body>
+    <div class="container">
+        <h1>Age Calculator</h1>
+        <form id="ageForm">
+            <label for="dob">Date of Birth:</label>
+            <input type="date" id="dob" required>
+            <button type="button" onclick="calculateAge()">Calculate Age</button>
+        </form>
+        <div id="result"></div>
+    </div>
+    <script src="script.js"></script>
+    <script>
+        function calculateAge() {
+    const dob = document.getElementById('dob').value;
+    if (dob === "") {
+        alert("Please enter your date of birth.");
+        return;
+    }
+
+    const dobDate = new Date(dob);
+    const today = new Date();
+
+    let age = today.getFullYear() - dobDate.getFullYear();
+    const monthDiff = today.getMonth() - dobDate.getMonth();
+    const dayDiff = today.getDate() - dobDate.getDate();
+
+    if (monthDiff < 0 || (monthDiff === 0 && dayDiff < 0)) {
+        age--;
+    }
+
+    document.getElementById('result').innerText = `Your age is: ${age} years.`;
+}
+
+    </script>
+</body>
+</html>
